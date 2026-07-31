@@ -1,0 +1,204 @@
+"""
+=========================================================
+              Professional Dice Roller
+=========================================================
+
+Version: 2.0
+
+Features:
+- Multiple dice rolling
+- Beautiful ASCII dice display
+- Random dice generation
+- Input validation
+- Total score calculation
+- Replay system
+- Clean function structure
+
+Author: Muhammad Raheel Babar
+=========================================================
+"""
+
+
+import random
+
+
+# =========================
+# Dice Art
+# =========================
+
+DICE_ART = {
+
+    1: (
+        "┌─────────┐",
+        "│         │",
+        "│    ●    │",
+        "│         │",
+        "└─────────┘"
+    ),
+
+    2: (
+        "┌─────────┐",
+        "│  ●      │",
+        "│         │",
+        "│      ●  │",
+        "└─────────┘"
+    ),
+
+    3: (
+        "┌─────────┐",
+        "│  ●      │",
+        "│    ●    │",
+        "│      ●  │",
+        "└─────────┘"
+    ),
+
+    4: (
+        "┌─────────┐",
+        "│ ●     ● │",
+        "│         │",
+        "│ ●     ● │",
+        "└─────────┘"
+    ),
+
+    5: (
+        "┌─────────┐",
+        "│ ●     ● │",
+        "│    ●    │",
+        "│ ●     ● │",
+        "└─────────┘"
+    ),
+
+    6: (
+        "┌─────────┐",
+        "│ ●     ● │",
+        "│ ●     ● │",
+        "│ ●     ● │",
+        "└─────────┘"
+    )
+}
+
+
+# =========================
+# Roll Dice Function
+# =========================
+
+def roll_dice(number):
+
+    dice = []
+
+    for _ in range(number):
+        dice.append(random.randint(1,6))
+
+    return dice
+
+
+
+# =========================
+# Display Dice
+# =========================
+
+def display_dice(dice):
+
+    for line in range(5):
+
+        for die in dice:
+
+            print(
+                DICE_ART[die][line],
+                end="  "
+            )
+
+        print()
+
+
+
+# =========================
+# Calculate Total
+# =========================
+
+def calculate_total(dice):
+
+    total = 0
+
+    for number in dice:
+        total += number
+
+    return total
+
+
+
+# =========================
+# Main Program
+# =========================
+
+def main():
+
+    print("""
+=========================================================
+              🎲 Professional Dice Roller
+=========================================================
+""")
+
+
+    while True:
+
+        while True:
+
+            try:
+
+                number_of_dice = int(
+                    input("How many dice do you want to roll?: ")
+                )
+
+
+                if number_of_dice > 0:
+                    break
+
+
+                print("Please enter a number greater than 0.")
+
+
+            except ValueError:
+
+                print("Invalid input. Enter a number.")
+
+
+
+        dice = roll_dice(number_of_dice)
+
+
+        print("\nYour Dice:")
+
+        display_dice(dice)
+
+
+        total = calculate_total(dice)
+
+
+        print("\n======================")
+        print(f"Dice Values: {dice}")
+        print(f"Total Score: {total}")
+        print("======================")
+
+
+
+        again = input(
+            "\nRoll again? (y/n): "
+        ).lower()
+
+
+        if again != "y":
+
+            print(
+                "\nThanks for using Dice Roller! 🎲"
+            )
+
+            break
+
+
+
+# Run Program
+
+if __name__ == "__main__":
+    main()
+    
